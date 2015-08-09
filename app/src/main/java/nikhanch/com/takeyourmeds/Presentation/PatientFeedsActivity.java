@@ -1,5 +1,6 @@
 package nikhanch.com.takeyourmeds.Presentation;
 
+import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -32,13 +33,24 @@ public class PatientFeedsActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_feeds);
 
-        mTabs.add(new FragmentPageData("Medications", FeedFragmentBase.FeedFragmentType.FRAGMENT_TYPE_MEDICATION_LIST));
         mTabs.add(new FragmentPageData("Appointments", FeedFragmentBase.FeedFragmentType.FRAGMENT_TYPE_APPOINTMENT_LIST));
+        mTabs.add(new FragmentPageData("Medications", FeedFragmentBase.FeedFragmentType.FRAGMENT_TYPE_MEDICATION_LIST));
 
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         mViewPager.setAdapter(new SamplePagerAdapter(getSupportFragmentManager()));
 
         mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
+        mSlidingTabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+            @Override
+            public int getIndicatorColor(int position) {
+                return Color.WHITE;
+            }
+
+            @Override
+            public int getDividerColor(int position) {
+                return Color.WHITE;
+            }
+        });
         mSlidingTabLayout.setViewPager(mViewPager);
     }
 

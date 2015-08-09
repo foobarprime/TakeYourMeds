@@ -1,6 +1,7 @@
 package nikhanch.com.takeyourmeds.Presentation.View;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.support.v4.view.PagerAdapter;
@@ -33,7 +34,6 @@ public class SlidingTabLayout extends HorizontalScrollView {
          * @return return the color of the divider drawn to the right of {@code position}.
          */
         int getDividerColor(int position);
-
     }
 
     private static final int TITLE_OFFSET_DIPS = 24;
@@ -69,6 +69,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
         mTitleOffset = (int) (TITLE_OFFSET_DIPS * getResources().getDisplayMetrics().density);
 
         mTabStrip = new nikhanch.com.takeyourmeds.Presentation.View.SlidingTabStrip(context);
+
         addView(mTabStrip, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
     }
 
@@ -144,6 +145,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
         textView.setGravity(Gravity.CENTER);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, TAB_VIEW_TEXT_SIZE_SP);
         textView.setTypeface(Typeface.DEFAULT_BOLD);
+        textView.setTextColor(Color.WHITE);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             // If we're running on Honeycomb or newer, then we can use the Theme's

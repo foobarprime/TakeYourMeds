@@ -57,9 +57,6 @@ public class AppointmentCard extends Card implements Comparable<AppointmentCard>
             public void onClick(Card card, View view) {
                 Intent startAppointmentActivityIntent = new Intent(getContext(), AppointmentActivity.class);
 
-                /*AppointmentListActivity a = (AppointmentListActivity)getContext();
-                .startActivity(startAppointmentActivityIntent);
-                */
                 Toast.makeText(getContext(), "Click Listener card=", Toast.LENGTH_LONG).show();
             }
         });

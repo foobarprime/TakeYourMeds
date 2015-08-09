@@ -55,7 +55,7 @@ class SlidingTabStrip extends LinearLayout {
         context.getTheme().resolveAttribute(R.attr.colorForeground, outValue, true);
         final int themeForegroundColor =  outValue.data;
 
-        mDefaultBottomBorderColor = setColorAlpha(themeForegroundColor,
+        mDefaultBottomBorderColor = setColorAlpha(Color.WHITE,
                 DEFAULT_BOTTOM_BORDER_COLOR_ALPHA);
 
         mDefaultTabColorizer = new SimpleTabColorizer();

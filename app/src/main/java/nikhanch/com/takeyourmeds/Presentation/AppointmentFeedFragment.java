@@ -40,7 +40,6 @@ public class AppointmentFeedFragment extends FeedFragmentBase  {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivity().setContentView(R.layout.activity_appointment_list);
 
         ArrayList<Card> appointmentCards = new ArrayList<>();
         mCardArrayAdapter = new CardArrayAdapter(getActivity(), appointmentCards);

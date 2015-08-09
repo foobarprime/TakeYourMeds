@@ -23,10 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity
-            android:name=".Presentation.AppointmentListActivity"
-            android:label="@string/title_activity_appointment_list" >
-        </activity> -->
+
         <activity
             android:name=".Presentation.AppointmentActivity"
             android:label="@string/title_activity_appointment" >

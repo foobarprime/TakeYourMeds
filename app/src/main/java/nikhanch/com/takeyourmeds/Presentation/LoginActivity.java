@@ -54,8 +54,6 @@ public class LoginActivity extends Activity {
     }
 
     private void showAppointmentList(){
-        //final Intent i = new Intent(getApplicationContext(), AppointmentListActivity.class);
-        //ActivityTransitionLauncher.with(LoginActivity.this).from(v).launch(i);
         startActivity(new Intent(getApplicationContext(), PatientFeedsActivity.class));
 
     }
