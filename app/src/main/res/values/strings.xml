@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">TakeYourMeds</string>
+
+    <string name="good_morning">Good Morning </string>
+    <string name="good_afternoon">Good Afternoon </string>
+    <string name="good_evening">Good Evening </string>
+    <string name="title_appointment_list">Appointments</string>
+    <string name="title_appointment_detail">Appointment Detail</string>
+    <string name="title_activity_appointment_list">Upcoming Appointments</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_appointment">AppointmentActivity</string>
+    <string name="UpcomingAppointmentsActivityName">Upcoming Appointments</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_patient_feeds">PatientFeedsActivity</string>
+
+</resources>
