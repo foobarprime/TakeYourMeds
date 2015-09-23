@@ -1,0 +1,91 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="nikhanch.com.takeyourmeds.Presentation.AlertsFeedFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:isScrollContainer="false"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Medication Alerts"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#f7fffa"
+            android:textStyle="bold"
+            android:id="@+id/alerts_medications_textView"/>
+        <it.gmariotti.cardslib.library.view.CardViewNative
+
+            android:id="@+id/alertsMedicationsCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginBottom="5dp"
+            app:card_layout_resourceID="@layout/native_card_layout"
+            />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="Food And Drink Alerts"
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#f7fffa"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:id="@+id/alerts_food_textView"/>
+            <it.gmariotti.cardslib.library.view.CardViewNative
+                android:id="@+id/alertsFoodCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginBottom="5dp"
+                app:card_layout_resourceID="@layout/native_card_layout"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="Other Alerts"
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#f7fffa"
+                android:textStyle="bold"
+                android:isScrollContainer="false"
+                android:layout_height="wrap_content"
+                android:id="@+id/alerts_misc_textView"/>
+
+            <it.gmariotti.cardslib.library.view.CardViewNative
+                android:id="@+id/alertsMiscCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+
+                app:card_layout_resourceID="@layout/native_card_layout"
+                />
+
+        <at.markushi.ui.CircleButton
+            android:id="@+id/alerts_calendar_imageView"
+            android:layout_width="64dip"
+            android:layout_height="64dip"
+            android:src="@mipmap/calendar_blue"
+            android:layout_gravity="right|bottom"
+            app:cb_color="#ffffff"
+            app:cb_pressedRingWidth="8dip" />
+    </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

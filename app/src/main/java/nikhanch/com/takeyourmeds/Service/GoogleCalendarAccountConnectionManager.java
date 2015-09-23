@@ -25,6 +25,7 @@ import java.util.Arrays;
 
 import nikhanch.com.takeyourmeds.Application;
 import nikhanch.com.takeyourmeds.Utils.GoogleCalendarConstants;
+import timber.log.Timber;
 
 /**
  * Created by nikhanch on 7/25/2015.
@@ -36,6 +37,7 @@ public class GoogleCalendarAccountConnectionManager {
     private Service mParentService;
     private ConnectionStatus mConnectionStatus = null;
 
+    private GoogleApiCommunicationErrorContext communicationErrorContext = null;
 
     // static defaults
     private static final String[] SCOPES = { CalendarScopes.CALENDAR_READONLY };
@@ -105,6 +107,7 @@ public class GoogleCalendarAccountConnectionManager {
     }
 
     public void OnUserActivityCompleted(int requestCode, int resultCode, Intent data){
+        this.communicationErrorContext = null;
         switch(requestCode) {
             case GoogleCalendarConstants.REQUEST_GOOGLE_PLAY_SERVICES:
                 if (resultCode == Activity.RESULT_OK && isGooglePlayServicesAvailable()){
@@ -178,6 +181,30 @@ public class GoogleCalendarAccountConnectionManager {
         return mService;
     }
 
+    public void OnGoogleApiCommunicationError(GoogleApiCommunicationErrorContext errorContext){
+
+        if (this.communicationErrorContext != null) {
+            GoogleApiCommunicationErrorContext.ErrorType thisErrorType = this.communicationErrorContext.getErrorType();
+            GoogleApiCommunicationErrorContext.ErrorType newErrorType = errorContext.getErrorType();
+
+            if (thisErrorType != GoogleApiCommunicationErrorContext.ErrorType.OtherException &&
+                    thisErrorType == newErrorType) {
+                Timber.d("Skipping dup exception of type = " + thisErrorType.name());
+                return;
+            }
+        }
+
+        this.communicationErrorContext = errorContext;
+        Application.getEventBus().post(this.communicationErrorContext);
+    }
+
+    @Produce
+    public GoogleApiCommunicationErrorContext getErrorContext(){
+        if (this.communicationErrorContext != null){
+            return communicationErrorContext;
+        }
+        return null;
+    }
     //endregion
 
     //region ConnectionState

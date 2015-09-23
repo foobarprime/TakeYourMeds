@@ -5,6 +5,8 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -14,13 +16,17 @@ public class ServiceRestartScheduer extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, new Intent(context, ServiceStartReceiver.class), PendingIntent.FLAG_CANCEL_CURRENT);
+        Toast.makeText(context, "service restart sched", Toast.LENGTH_LONG).show();
+
+        ServiceStartReceiver.startDataSyncService(context);
+
+        PendingIntent pendingIntentFuture = PendingIntent.getBroadcast(context, 1, new Intent(context, ServiceStartReceiver.class), PendingIntent.FLAG_CANCEL_CURRENT);
 
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.HOUR, 1);
 
         AlarmManager service = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        service.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), REPEAT_TIME, pendingIntent);
+        //service.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), REPEAT_TIME, pendingIntentFuture);
 
     }
 }

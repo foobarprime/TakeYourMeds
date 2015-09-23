@@ -51,15 +51,18 @@ public class AppointmentCard extends Card implements Comparable<AppointmentCard>
 
         this.mAppointment = a;
 
+        /*
         //Set a OnClickListener listener
         setOnClickListener(new OnCardClickListener() {
             @Override
             public void onClick(Card card, View view) {
                 Intent startAppointmentActivityIntent = new Intent(getContext(), AppointmentActivity.class);
-
+                startAppointmentActivityIntent.putExtra(AppointmentActivity.APPOINTMENT_KEY_STRING, mAppointment);
+                getContext().startActivity(startAppointmentActivityIntent);
                 Toast.makeText(getContext(), "Click Listener card=", Toast.LENGTH_LONG).show();
             }
         });
+        */
     }
 
     @Override

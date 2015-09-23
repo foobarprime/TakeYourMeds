@@ -1,6 +1,5 @@
 package nikhanch.com.takeyourmeds.Presentation;
 
-import android.accounts.AccountManager;
 import android.app.Activity;
 import android.app.Dialog;
 import android.support.v4.app.Fragment;
@@ -8,7 +7,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
@@ -19,14 +17,10 @@ import com.google.api.client.googleapis.extensions.android.gms.auth.GooglePlaySe
 import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException;
 import com.squareup.otto.Subscribe;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
-
 import nikhanch.com.takeyourmeds.Application;
-import nikhanch.com.takeyourmeds.Service.AppointmentsCalendarManager;
+import nikhanch.com.takeyourmeds.Service.GoogleApiCommunicationErrorContext;
 import nikhanch.com.takeyourmeds.Service.GoogleCalendarDataSyncService;
 import nikhanch.com.takeyourmeds.Service.GoogleCalendarAccountConnectionManager;
-import nikhanch.com.takeyourmeds.Service.SyncAppointmentsAsyncTask;
 import nikhanch.com.takeyourmeds.Utils.GoogleCalendarConstants;
 import timber.log.Timber;
 
@@ -60,8 +54,8 @@ public abstract class GoogleCalendarDataSyncServiceTalker extends Fragment{
                 registered = false;
             }
         }
-        @Subscribe public void OnAppointmentCalendarSyncFailed(final SyncAppointmentsAsyncTask.AppointmentsUpdatedEvent.ErrorContext errorContext){
-            mManager.OnAppointmentCalendarSyncFailedEvent(errorContext);
+        @Subscribe public void OnAppointmentCalendarSyncFailed(final GoogleApiCommunicationErrorContext googleApiCommunicationErrorContext){
+            mManager.OnGoogleApiCommunicationError(googleApiCommunicationErrorContext);
         }
         @Subscribe public void onConnectionStatusAvailable(final GoogleCalendarAccountConnectionManager.ConnectionStatus status){
             mManager.onConnectionStatusAvailableEvent(status);
@@ -115,22 +109,22 @@ public abstract class GoogleCalendarDataSyncServiceTalker extends Fragment{
         }
     }
 
-    public void OnAppointmentCalendarSyncFailedEvent(final SyncAppointmentsAsyncTask.AppointmentsUpdatedEvent.ErrorContext errorContext) {
+    public void OnGoogleApiCommunicationError(final GoogleApiCommunicationErrorContext googleApiCommunicationErrorContext) {
         // TODO: figure out when error has been corrected and issue re-sync
-        if (errorContext != null) {
-            switch (errorContext.getErrorType()) {
+        if (googleApiCommunicationErrorContext != null) {
+            switch (googleApiCommunicationErrorContext.getErrorType()) {
                 case GooglePlayServicesAvailabilityException: {
-                    GooglePlayServicesAvailabilityIOException exception = (GooglePlayServicesAvailabilityIOException) errorContext.getException();
+                    GooglePlayServicesAvailabilityIOException exception = (GooglePlayServicesAvailabilityIOException) googleApiCommunicationErrorContext.getException();
                     showGooglePlayServicesAvailabilityErrorDialog(exception.getConnectionStatusCode());
                     return;
                 }
                 case UserRecoverableException: {
-                    UserRecoverableAuthIOException exception = (UserRecoverableAuthIOException) errorContext.getException();
+                    UserRecoverableAuthIOException exception = (UserRecoverableAuthIOException) googleApiCommunicationErrorContext.getException();
                     startActivityForResult(exception.getIntent(), GoogleCalendarConstants.REQUEST_AUTHORIZATION);
                 }
                 case OtherException:
-                    Timber.e("Appointment update", errorContext.getException().getMessage());
-                    Toast.makeText(getActivity(), "Appointment update error " + errorContext.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    Timber.e("Appointment update", googleApiCommunicationErrorContext.getException().getMessage());
+                    Toast.makeText(getActivity(), "Appointment update error " + googleApiCommunicationErrorContext.getException().getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     }

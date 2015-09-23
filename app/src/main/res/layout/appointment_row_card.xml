@@ -45,27 +45,12 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/doctorInfoLayout"
-            android:layout_width="fill_parent"
+        <TextView
+            android:id="@+id/card_main_doctors_name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/card_main_doctors_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dr. Jane Doe"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="  at"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:layout_gravity="left|bottom"/>
-
-        </LinearLayout>
+            android:text="Dr. Jane Doe"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
             android:id="@+id/card_main_time"

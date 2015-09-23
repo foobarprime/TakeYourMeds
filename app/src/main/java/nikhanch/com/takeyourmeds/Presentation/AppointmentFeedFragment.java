@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 
 import com.squareup.otto.Subscribe;
 
+import org.buraktamturk.loadingview.LoadingView;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -24,6 +26,7 @@ import nikhanch.com.takeyourmeds.DataModels.Appointment;
 import nikhanch.com.takeyourmeds.Presentation.PresentationDataModels.AppointmentCard;
 import nikhanch.com.takeyourmeds.Presentation.View.SlidingTabLayout;
 import nikhanch.com.takeyourmeds.R;
+import nikhanch.com.takeyourmeds.Service.AppointmentsCalendarManager;
 
 public class AppointmentFeedFragment extends FeedFragmentBase  {
 
@@ -51,11 +54,22 @@ public class AppointmentFeedFragment extends FeedFragmentBase  {
 
         Application.getEventBus().register(this);
     }
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Application.getEventBus().unregister(this);
+    }
     @Subscribe
-    public void OnAppointmentsUpdated(ArrayList<Appointment> updatedAppointments){
-        //List<Appointment> appointments = getAppointments();
-        ArrayList<Card> appointmentCards = getAppointmentCards(updatedAppointments);
+    public void OnAppointmentsUpdatedEvent(AppointmentsCalendarManager.AppointmentsUpdatedEvent updatedAppointments){
+
+        if (updatedAppointments == null || updatedAppointments.getUpdatedAppointments() == null){
+            return;
+        }
+        UpdateAppointments(updatedAppointments.getUpdatedAppointments());
+    }
+
+    public void UpdateAppointments(AppointmentsCalendarManager.AppointmentsUpdatedEvent.UpdatedAppointments updatedAppointments) {
+        ArrayList<Card> appointmentCards = getAppointmentCards(updatedAppointments.getAppointments());
         Collections.sort(appointmentCards, new Comparator<Card>() {
             @Override
             public int compare(Card lhs, Card rhs) {
@@ -64,11 +78,15 @@ public class AppointmentFeedFragment extends FeedFragmentBase  {
                 return lhsAppointmentCard.compareTo(rhsAppointmentCard);
             }
         });
+        LoadingView view = (LoadingView)getActivity().findViewById(R.id.appointmentFeedLoading);
+        view.setLoading(false);
+        view.setVisibility(View.GONE);
 
         mCardArrayAdapter.addAll(appointmentCards);
+
     }
 
-    private ArrayList<Card> getAppointmentCards(List<Appointment> appointments){
+        private ArrayList<Card> getAppointmentCards(List<Appointment> appointments){
         ArrayList<Card> appointmentCards = new ArrayList<Card>();
         for (Appointment a : appointments){
             AppointmentCard card = new AppointmentCard(getActivity(), a);

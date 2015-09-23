@@ -1,10 +1,51 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<FrameLayout
+    tools:context="nikhanch.com.takeyourmeds.Presentation.MedicationFeedFragment"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="nikhanch.com.takeyourmeds.Presentation.MedicationFeedFragment">
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="FooBar"
+        android:id="@+id/medication_for_date"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#f7fffa"
+        android:textStyle="bold"
+        />
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        <it.gmariotti.cardslib.library.view.CardViewNative
+            android:id="@+id/medicationCardViewNative"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            app:card_layout_resourceID="@layout/native_card_layout"
+            />
+</LinearLayout>
+
+    <org.buraktamturk.loadingview.LoadingView
+        android:id="@+id/medicationFeedLoading"
+        app:lv_loading="true"
+        app:lv_title="Loading Medications"
+        app:lv_color="#ffffff"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_gravity="center" />
+
+    <at.markushi.ui.CircleButton
+        android:id="@+id/medication_calendar_imageView"
+        android:layout_width="64dip"
+        android:layout_height="64dip"
+        android:src="@mipmap/calendar_blue"
+        android:layout_gravity="right|bottom"
+        app:cb_color="#ffffff"
+        app:cb_pressedRingWidth="8dip" />
 
 </FrameLayout>

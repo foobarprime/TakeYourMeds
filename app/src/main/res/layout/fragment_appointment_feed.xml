@@ -1,8 +1,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="nikhanch.com.takeyourmeds.Presentation.AppointmentFeedFragment"
-    xmlns:card="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
     >
 
@@ -10,7 +11,16 @@
         android:id="@+id/appointmentCardListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        card:list_card_layout_resourceID="@layout/list_card_layout"
+        app:list_card_layout_resourceID="@layout/list_card_layout"
         />
+
+    <org.buraktamturk.loadingview.LoadingView
+        android:id="@+id/appointmentFeedLoading"
+        app:lv_loading="true"
+        app:lv_title="Loading Appointments"
+        app:lv_color="#ffffff"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_gravity="center" />
 
 </FrameLayout>

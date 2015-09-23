@@ -10,6 +10,7 @@ public class GoogleCalendarDataSyncService extends Service {
     private final IBinder mBinder = new GoogleCalendarDataSyncServiceBinder();
     private GoogleCalendarAccountConnectionManager mGoogleCalendarTalker;
     private CalendarManager mCalendarManager;
+    private AppNotificationManager mNotificationManager;
 
     private boolean serviceStarted = false;
 
@@ -18,13 +19,14 @@ public class GoogleCalendarDataSyncService extends Service {
 
         StartServiceIfRequired();
 
-        return Service.START_NOT_STICKY;
+        return Service.START_STICKY;
     }
 
     @Override
     public void onDestroy() {
         this.serviceStarted = false;
     }
+
 
     private void StartServiceIfRequired(){
         if (this.serviceStarted){
@@ -33,6 +35,7 @@ public class GoogleCalendarDataSyncService extends Service {
 
         this.mGoogleCalendarTalker = new GoogleCalendarAccountConnectionManager(this);
         this.mCalendarManager = new CalendarManager(this);
+        this.mNotificationManager = new AppNotificationManager(this);
         this.serviceStarted = true;
     }
 

@@ -36,7 +36,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View Appointments"
+        android:text="View Appointments &amp; Medication"
         android:id="@+id/button"
         android:layout_below="@+id/welcomeMessage"
         android:layout_centerHorizontal="true"

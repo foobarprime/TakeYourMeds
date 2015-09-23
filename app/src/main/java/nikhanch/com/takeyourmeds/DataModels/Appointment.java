@@ -1,19 +1,23 @@
 package nikhanch.com.takeyourmeds.DataModels;
 
-import com.google.api.client.util.DateTime;
+import android.app.DatePickerDialog;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventAttendee;
+import com.google.api.services.calendar.model.EventDateTime;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import nikhanch.com.takeyourmeds.R;
+
 /**
  * Created by nikhanch on 7/22/2015.
  */
-public class Appointment {
+public class Appointment extends NotifiableItem implements Parcelable{
     private String doctorsName;
     private String doctorPhoto;
     private String procedureName;
@@ -21,12 +25,11 @@ public class Appointment {
     private String location;
     private String notes;
     private ArrayList<String> reminders;
-    private ArrayList<MedicineAlert> medicineAlerts;
 
     private static final String REMINDER_TAG = "Reminders:";
     private static final String DOCTOR_PHOTO_TAG = "Doctor Photo:";
     private static final String DOCTOR_NAME_TAG = "Doctor Name:";
-    private static final String MEDICINE_ALERT_TAG = "Medicine alert:";
+    private static final long NOTIFICATION_MS_BEFORE_APPOINTMENT_START = 30 * 60 * 1000;
 
     /*
     public Appointment(String doctorsName, String procedureName, DateTime appointmentDate){
@@ -36,13 +39,14 @@ public class Appointment {
         this.medicineAlerts = new ArrayList();
     }
 */
+
     public Appointment(Event event){
-        // TODO: fill
+
         if (event == null){
             return;
         }
 
-        this.medicineAlerts = new ArrayList();
+        this.setId(event.getId());
         this.reminders = new ArrayList();
 
         if (event.getAttendees() != null){
@@ -55,10 +59,17 @@ public class Appointment {
         this.procedureName = event.getSummary();
 
         if (event.getStart() != null){
-            DateTime startTime = event.getStart().getDate();
-            if (startTime != null){
-                this.appointmentDate = new Date(startTime.getValue());
+            EventDateTime eventDateTime = event.getStart();
+
+            if (eventDateTime.getDate() != null){
+                this.appointmentDate = new Date(eventDateTime.getDate().getValue());
             }
+            else if (event.getStart().getDateTime() != null){
+                this.appointmentDate = new Date(eventDateTime.getDateTime().getValue());
+            }
+        }
+        if (this.appointmentDate == null){
+            throw new AssertionError("appointment Date is null");
         }
         this.location = event.getLocation();
         this.notes = event.getDescription();
@@ -83,14 +94,26 @@ public class Appointment {
                 String name = line.replaceFirst(DOCTOR_NAME_TAG, "");
                 this.doctorsName = name;
             }
-            else if (line.startsWith(MEDICINE_ALERT_TAG)){
-
-            }
         }
     }
 
-    public void AddMedicineTime(MedicineAlert m){
-        this.medicineAlerts.add(m);
+    @Override
+    public long getNumMsTillAlertShouldBeDisplayed() {
+        //return System.currentTimeMillis();
+        return this.getAppointmentDate().getTime() - NOTIFICATION_MS_BEFORE_APPOINTMENT_START;
+    }
+
+    @Override
+    public String getNotificationTitle() {
+        return "Upcoming Appointment";
+    }
+    @Override
+    public String getNotificationText() {
+        return this.getProcedureName();
+    }
+    @Override
+    public int getNotificationIcon() {
+        return R.mipmap.doctor_appointment_512;
     }
 
     public String getDoctorsName(){
@@ -105,13 +128,54 @@ public class Appointment {
         return this.appointmentDate;
     }
 
-    public ArrayList<MedicineAlert> getMedicineAlerts(){
-        return this.medicineAlerts;
-    }
-
     public String getDoctorPhoto() {
         return doctorPhoto;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        /**
+         * private String doctorsName;
+         private String doctorPhoto;
+         private String procedureName;
+         private Date appointmentDate;
+         private String location;
+         private String notes;
+         private ArrayList<String> reminders;
+         */
+
+        dest.writeString(doctorsName);
+        dest.writeString(doctorPhoto);
+        dest.writeString(procedureName);
+        dest.writeLong(appointmentDate.getTime());
+        dest.writeString(location);
+        dest.writeString(notes);
+        dest.writeStringList(reminders);
+    }
+    public Appointment(Parcel in){
+        doctorsName = in.readString();
+        doctorPhoto = in.readString();
+        procedureName = in.readString();
+        appointmentDate = new Date(in.readLong());
+        location = in.readString();
+        notes = in.readString();
+        reminders = new ArrayList<String>();
+        in.readStringList(reminders);
+    }
+    public static final Parcelable.Creator<Appointment> CREATOR = new Parcelable.Creator<Appointment>() {
+
+        public Appointment createFromParcel(Parcel in) {
+            return new Appointment(in);
+        }
+
+        public Appointment[] newArray(int size) {
+            return new Appointment[size];
+        }
+    };
 }
 

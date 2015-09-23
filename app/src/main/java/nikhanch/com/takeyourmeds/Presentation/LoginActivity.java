@@ -9,8 +9,6 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 
-import com.kogitune.activity_transition.ActivityTransitionLauncher;
-
 import java.util.Calendar;
 
 import nikhanch.com.takeyourmeds.R;

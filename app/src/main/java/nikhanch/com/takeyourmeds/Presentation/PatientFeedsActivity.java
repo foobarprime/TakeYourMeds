@@ -33,6 +33,7 @@ public class PatientFeedsActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_feeds);
 
+        mTabs.add(new FragmentPageData("Alerts", FeedFragmentBase.FeedFragmentType.FRAGMENT_TYPE_ALERT_LIST));
         mTabs.add(new FragmentPageData("Appointments", FeedFragmentBase.FeedFragmentType.FRAGMENT_TYPE_APPOINTMENT_LIST));
         mTabs.add(new FragmentPageData("Medications", FeedFragmentBase.FeedFragmentType.FRAGMENT_TYPE_MEDICATION_LIST));
 
