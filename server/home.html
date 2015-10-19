@@ -1,0 +1,46 @@
+<html ng-app="cura">
+	<head>
+		<script src="/js/libs/jquery-1.7.min.js"></script>
+		<script src="/js/libs/rrule.js"></script>
+		<script src="/js/libs/nlp.js"></script>
+		<script src="/js/libs/angular.min2.js"></script>
+		<script src="/js/libs/angular-route.min.js"></script>
+		<script src="/js/libs/angular-animate.js"></script>
+		<link href="/stylesheets/main.css" rel="stylesheet" type="text/css">
+		<base href="/">
+	</head>
+	<body ng-controller="ViewController as myview">
+
+	<div id='logoheader' class='turq whitefont'>
+		CURA 
+		<div id='logosubheader' class = 'whitefont'>Patient engagement for the 21st century</div>
+		<div id='patientheader' class = 'whitefont'>Patient:&nbsp;
+			<select>
+				<option>John Doe
+				</option>
+			</select>
+		</div>
+	</div>
+
+	<!-- <div ng-view></div> -->
+
+	<div class="sidebar turq whitefont">
+		<div class = "option">
+			<a href = "/appointments"> Appointments </a>
+		</div>
+		<div class = "option" href="/medications">
+			<a href = "/medications"> Medications </a>
+		</div>
+		<div class = "option" href="/alerts">
+			<a href = "/alerts"> Alerts </a>
+		</div>
+	</div>
+
+	<div ng-view></div>
+
+	</body>
+	<script src="/js/helper/helper_functions.js"></script>
+	<script src="/js/general/controller.js"></script>
+</html>
+
+</div>

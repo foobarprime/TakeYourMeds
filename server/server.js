@@ -18,7 +18,8 @@ app.use("/json/",express.static(__dirname + '/json/'));
 app.use("/images/",express.static(__dirname + '/images/'));
 app.use("/stylesheets/",express.static(__dirname + '/stylesheets/'));
 app.use("/js/",express.static(__dirname + '/js/'));
-app.use("/",express.static(__dirname + '/html/'));
+app.use("/partials/",express.static(__dirname + '/partials/'));
+// app.use("/",express.static(__dirname + '/html/'));
 
 var cookieParser = require('cookie-parser');
 app.use(cookieParser());
@@ -37,6 +38,6 @@ app.set('view engine', 'jade');
 
 
 var myroutes = require("./routes.js")(app,passport);
-app.listen(3002);
-console.log('SERVER STARTED....LISTENING ON 3002');
+app.listen(80);
+console.log('SERVER STARTED....LISTENING ON 80');
 

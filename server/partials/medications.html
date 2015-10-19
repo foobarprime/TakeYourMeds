@@ -1,0 +1,14 @@
+<div class = "infowindow">
+	<table style= "margin-left: 20px; margin-top: 20px; margin-bottom: 30px;">
+		<tr>
+			<td width="450px">Date</td>
+			<td width="150px">Medication</td>
+			<td width="300px"></td>
+		</tr>
+		<tr ng-repeat="medication in medications">
+			<td>{{medication.recur_text}}</td>
+			<td>{{medication.summary}}</td>
+			<td><a href = "/edit/ebe4cjtol7ien5kte4b83hjhn8">Edit</a></td>
+		</tr>
+	</table>
+</div>

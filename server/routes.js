@@ -1,7 +1,5 @@
-var mongoose = require('mongoose');
-//mongoose.set('debug', true);
-var myschemas = require('./mongoose_schemas.js');
-var ObjectId = require('mongoose').Types.ObjectId; 
+var MongoMethods = require('./mongo_methods.js');
+var GoogleCalendar = require('./google_calendar_api.js');
 
 var fs = require('fs'),
     path = require('path');
@@ -15,21 +13,6 @@ var fs = require('fs'),
 	// timestampToDate = pagefile.timestampToDate,
 	// mkdirParent = pagefile.mkdirParent;
 
-var viewPaneModels = myschemas.viewPaneModel;
-var dimensionModels = myschemas.dimensionModel;
-var cellModels = myschemas.cellModel;
-var cellCollectionModels = myschemas.cellCollectionModel;
-var modelContainers = myschemas.modelContainer;
-var collectionDimensionModels = myschemas.collectionDimensionModel;
-var userModels = myschemas.userModel;
-
-var serverLogFileName = "./logs/server.txt";
-var serverLogFileName2 = "./logs/server2.txt";
-var clientLogFileName = "./logs/client.txt";
-var clientLogFileName2 = "./logs/client2.txt";
-
-//require('./modeler/js/logger').consolelog;
-
 var myroutes = function(app, passport){ 
 
 
@@ -41,14 +24,15 @@ var myroutes = function(app, passport){
 			'x-sent': true
 		}
 	};
-	
+
 	app.get('/', function(req, res) {
 		console.log('GOT A REQUEST FOR /');
-		res.sendFile('/login.html', options);
+		res.sendFile('/index.html', options);
+		// res.redirect('/login');
 	});
 
 	app.post('/login', passport.authenticate('local-login', {
-			successRedirect : '/', // redirect to the secure profile section
+			successRedirect : '/home', // redirect to the secure profile section
 			failureRedirect : '/login', // redirect back to the signup page if there is an error
 			failureFlash : true // allow flash messages
 		})
@@ -62,19 +46,13 @@ var myroutes = function(app, passport){
 
 	app.get('/signup', function(req, res) {
 		// render the page and pass in any flash data if it exists
-		res.sendFile('/signup.html', options);
+		res.sendFile('/index.html', options);
 	});
 
-	app.use("*", isLoggedIn);
-
-	app.get('/template/get/:name', function(req, res) {
-		//console.log('******OH REALLY!!!******');
-		console.log('******GOT REQUEST FOR TEMPLATE******');
-		console.log(req.url);
-		console.log('/modeler/templates/'+req.params.name+'.html');
-		res.sendFile('/modeler/templates/'+req.params.name+'.html', options);
+	app.get('/home', function(req, res) {
+		// render the page and pass in any flash data if it exists
+		res.sendFile('/home.html', options);
 	});
-
 
 	app.get('/settings/get/', function(req, res) {
 		
@@ -91,51 +69,38 @@ var myroutes = function(app, passport){
 		
 	});
 
+	app.get('/medications/all', function(req, res) {
+		console.log('GOT REQUEST FOR MEDICATIONS');
 
-	app.get('/collection/get/id/', function(req, res) {
-		var returnstring = "";
-		console.log('GOT A REQUEST FOR A CELLCOLLECTION WITH ID: ' + req.query.id);
-		//console.log(req);
-		
-		cellCollectionModels.findOne({ '_id': req.query.id}).lean().exec(function (err, cellCollectionModel) {
-			if (err) return console.error(err);
-			res.jsonp(cellCollectionModel);
+		GoogleCalendar.getMedications(function(medications){
+			res.jsonp({'medications': medications});
 		});
-		
 	});
+	
+	app.get('/appointments/all', function(req, res) {
+		console.log('GOT REQUEST FOR MEDICATIONS');
 
-
-	app.get('/dimensions/delete/all', function(req, res) {
-		var returnstring = "";
-		
-		dimensionModels.remove();
-		
-	});	
-
-
-	app.get('/dimensions/get/all', function(req, res) {
-		
-		dimensionModels.find().sort("position").lean().exec(function (err, dimensionModel) {
-			if (err) return console.error(err);
-			res.jsonp(dimensionModel);
+		GoogleCalendar.getMedications(function(medications){
+			res.jsonp({'appointments': medications});
 		});
-		
 	});
+	
+	app.get('/alerts/all', function(req, res) {
+		console.log('GOT REQUEST FOR MEDICATIONS');
 
-
-	app.get('/profile', isLoggedIn, function(req, res) {
-		res.sendFile('/profile.html', options); 
-		//{
-			//user : req.user // get the user out of session and pass to template
-		//});
+		GoogleCalendar.getMedications(function(medications){
+			res.jsonp({'alerts': medications});
+		});
 	});
-
+	
 	app.get('/logout', function(req, res) {
 		console.log('GOT REQUEST TO LOG OUT');
 		req.logout();
 		res.sendFile('/login.html', options);
 	});
 	
+	app.use("*", isLoggedIn);
+
 	function isLoggedIn(req, res, next) {
 		
 		//console.log('CHECK WHETHER ONE IS console.logGED IN');
@@ -150,7 +115,7 @@ var myroutes = function(app, passport){
 		}
 
 		//res.redirect('/console.login');
-		res.sendFile('/login.html', options);
+		res.sendFile('/home.html', options);
 	}
 
 };
