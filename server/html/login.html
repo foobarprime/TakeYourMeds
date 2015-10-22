@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<script src="/js/jquery-1.7.min.js"></script>
+		<script src="/js/jquery-ui.min.js"></script>
+		<script src="/js/angular.js"></script>
+		<script src="/js/angular-animate.js"></script>
+		<link href="/stylesheets/main.css" rel="stylesheet" type="text/css">
+		<script src="/js/login_module.js"></script>
+	</head>
+	<body ng-app="modeler" style = "background-color:#ccc">
+	<div class="form">
+		<!-- LOGIN FORM -->
+		<form action="/login" method="post">
+			<div class="form-group">
+				<label>Email</label>
+				<input type="text" class="form-control" name="email">
+			</div>
+			<div class="form-group">
+				<label>Password</label>
+				<input type="password" class="form-control" name="password">
+			</div>
+				<input type="text" name="testname" value="false" style="opacity: 0;">
+
+			<button type="submit" class="greenbutton">Login</button>
+		</form>
+	</div>
+	</body>
+</html>

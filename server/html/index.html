@@ -1,0 +1,142 @@
+<html ng-app="modeler">
+	<head>
+		<link href="/stylesheets/primary.css" rel="stylesheet" type="text/css">
+<!--		<link href="/stylesheets/animate.css" rel="stylesheet" type="text/css">
+		<link href="/stylesheets/main.css" rel="stylesheet" type="text/css">
+		<link href="/stylesheets/buttons.css" rel="stylesheet" type="text/css">
+		<link href="/stylesheets/hover.css" rel="stylesheet" type="text/css">
+		<link href="/stylesheets/editor.css" rel="stylesheet" type="text/css">
+		<link href="/stylesheets/borders.css" rel="stylesheet" type="text/css">
+		<link href="/stylesheets/scrollbar2.css" rel="stylesheet" type="text/css">
+		<link href="/stylesheets/sidebar.css" rel="stylesheet" type="text/css">
+		<link href="/stylesheets/tabs.css" rel="stylesheet" type="text/css">
+		<link href="/stylesheets/colorcombos.css" rel="stylesheet" type="text/css">
+		<link href="/stylesheets/transitions.css" rel="stylesheet" type="text/css">
+		<link href="/stylesheets/mytext.css" rel="stylesheet" type="text/css">
+		<script src="/js/libs/mousetrap.min.js"></script>
+		<script src="/js/libs/mousetrap-bind-dictionary.min.js"></script>
+		<link href="/stylesheets/layers.css" rel="stylesheet" type="text/css">-->
+		<link href="/images/cupertino/jquery-ui.css" rel="stylesheet" type="text/css">
+		<script src="/js/libs/jquery-1.7.min.js"></script>
+		<script src="/js/libs/jquery-ui.min.js"></script>
+		<script src="/js/libs/angular.min2.js"></script>
+		<script src="/js/libs/angular-animate.js"></script>
+		<script src="/js/libs/treeStructure.js"></script>
+		<script>
+			// var myurl = "http://localhost:3001/"; 
+			//var myurl = "http://104.236.95.15:3001/";
+			var myurl = "http://45.55.21.8:3001/";
+		</script>
+	</head>
+	<body class = "universalfont" style = "margin: 0px; padding: 0px;" ng-controller="ViewController as myview">
+
+		<!-- THIS IS THE LOGO VIEW -->
+		<div class = "logo layer3" style = "position: absolute; top: 0px; left: 0px; width: 45px; height: 40px; line-height: 40px; vertical-align: middle; text-align: center;">
+			M
+		</div>
+	
+
+		<!-- THIS IS THE TOP MENU CONTAINING THE FORMULA BAR, SETTINGS, ETC -->
+		<div class = "defaultbackgr whitefont layer2" style="font-size: 18px; position: relative; padding-top: 5px; padding-left: 60px; height:35px; border-bottom: 1px solid black;">
+			<div class = "floatleft" style = "">
+				<div style="display:inline; font-size: 15px">&nbsp;=&nbsp;</div>
+				<div id="formula_editor" keyboard="default_keyboard" contenteditable="true" ng-model="thisViewPane.selected_formula">{{thisViewPane.selected_formula}}</div>
+				<div style="" id="cell_location" class="uneditable">{{thisViewPane.thiscelllabel}} { {{thisViewPane.SELECTED_ROW_INDEX}},{{thisViewPane.SELECTED_COL_INDEX}} } {{thisViewPane.thisvcellindex}}, {{thisViewPane.thismcellindex}}
+				</div>
+				<div style="display:none" id="value_output">{{thisViewPane.selected_value}}</div>
+				<div style="display:none" id="hidden_output"></div>
+				<div style="display:none" id="browser_output" ng-model="browseroutputlog"></div>
+			</div>
+			
+			<div class="floatright inline" style="padding-right: 10px; padding-top: 5px;" ng-hide="thisSettings.firstname==''">
+				<div class="inline" style="" ng-hide="thisSettings.firstname==''">Hi, {{thisSettings.firstname}}. &nbsp; &nbsp; &nbsp;</div>
+				<div class="inline" style="" ng-show="thisSettings.firstname==''">No one logged in. &nbsp; &nbsp; &nbsp;</div>
+				<a href=""><div class = "button letterpress inline" ng-click = "settings_show = true;">settings</div></a>
+				<a href=""><div class = "button letterpress inline" id = "logoutbutton" ng-model="fileNameObject">logout</div></a>
+			</div>
+		</div>
+
+		<!-- THIS IS THE SIDEBAR / MENU THAT EXPANDS -->
+		<div class = "expandcontainer layer1" style = "margin-top: 40px; display: block; width: 50px; position: absolute; top: 0px; height: auto; bottom: 0px; left: 0px;">
+			<mytemplate id = "mainmenu" ng-hide = "!thisInterface.modelermenu.expanded" style = "overflow: hidden; z-index: 1; height: 100%; position: absolute; left: 0px;" name = "verticalmenu" class = "firstletterEffect expandEffect grayonslightlydark" model = "thisInterface.modelermenu">
+			</mytemplate>
+		</div>
+
+		<!-- THIS IS THE SPREADSHEET VIEW -->
+		<div class = "modelingcontainer layer2" ng-class = "{'marginleft60' : !menu.expanded, 'marginleft150' : menu.expanded }" style = " margin-top: 15px;" >
+		
+			<div class = "viewcontainer" style="width: 99%; background-color: white; overflow: hidden;">
+
+				<div class = "layer2 emptyrow tabrow labelfontstyle" style="display: block;">
+					<div class = "button tabheader inactive_tab" style = "display: inline-block;">
+						<div class = "vertical_align_outside action_tab" style="text-align: center;">
+							<div class = "vertical_align_inside" keyboard="default_keyboard" style="word-wrap: normal; word-break: normal; text-align: center; margin-left: 10px;">
+							+
+							</div>
+						</div>
+					</div>
+					<div sortablechildren = "true" class = "inline">
+					<collectiontab class = "sortable" sortindex = "{{collectionIndex}}" collectionindex = "{{collectionIndex}}" style = "display: inline-block;" ng-if = "$index > 0" ng-repeat="item in thisModelContainer.collections track by $index" hello="{{item.name}}" ng-init = "collectionIndex = $index">
+						<div ng-class = "{'inactive_tab' : $index != thisModelContainer.active_collection_index, 'active_tab' : $index == thisModelContainer.active_collection_index}" class = "vertical_align_outside labelheight tabheader" style="">
+							<div class = "vertical_align_inside" keyboard="default_keyboard" style="word-wrap: normal; word-break: normal; text-align: center; margin-left: 10px;" ng-model = "thisModelContainer.collections[collectionIndex].name">{{thisModelContainer.collections[collectionIndex].name}}</div>
+						</div>
+					</collectiontab>
+					</div>
+				</div>
+				
+				<div ng-hide = "!thisDimensionView.visible" class = "layer3 nonspreadsheetcontainer floatleft grayborder" style="margin-right: -1px; position: relative; height: {{Globals.SCROLLPANEHEIGHT-30}}px; overflow: hidden;" >
+									
+					<dimensionviewcontainer>
+					</dimensionviewcontainer>
+					
+				</div>	
+				
+				<!--<div class = "floatleft" style = "position:relative; width: 0px; height: 100%; border: 0px solid #ccc; background-color: white; z-index: 10000;">
+				</div>-->
+
+				<spreadsheetcontainer class = "layer3">
+				</spreadsheetcontainer>
+
+			</div>
+		</div>
+		
+		<script src="/js/helper/consolelog.js"></script>
+		<script src="/js/helper/helper_functions.js"></script>
+
+		<script src="/js/graph/adjlist.js"></script>
+		<script src="/js/graph/vertex.js"></script>
+		<script src="/js/graph/indegreetable.js"></script>
+		<script src="/js/graph/graph.js"></script>
+
+		<script src="/js/viewpanes/interface_components.js"></script>
+		<script src="/js/viewpanes/settings.js"></script>
+
+		<script src="/js/general/queue.js"></script>
+
+		<script src="/js/general/controller.js"></script>
+
+		<script src="/js/general/globals.js"></script>
+		<script src="/js/general/celllabels.js"></script>
+
+		<script src="/js/parser/parser_functions.js"></script>
+		<script src="/js/parser/parser.js"></script>
+		<script src="/js/parser/expression.js"></script>
+
+		<script src="/js/general/keyboard.js"></script>
+
+		<script src="/js/viewpanes/highlightpane.js"></script>
+		<script src="/js/viewpanes/viewpane.js"></script>
+		<script src="/js/viewpanes/dimensionview.js"></script>
+
+		<script src="/js/general/cellcollection.js"></script>
+		<script src="/js/general/modelcontainer.js"></script>
+		<script src="/js/general/angular_factories.js"></script>
+
+		<script src="/js/templates/template_directives.js"></script>
+<!--		
+		<script src="/js/dependency_grapher.js"></script>
+		<script src="/js/controller.js"></script>
+-->
+
+	</body>
+</html>

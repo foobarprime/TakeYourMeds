@@ -1,0 +1,177 @@
+body {
+	background-color: white;
+}
+
+body, body *{
+	font-family: "Hind", "Open Sans", "Avenir Next", "Maven Pro";
+	font-size: 18px;
+}
+
+.form{
+	border: 1px solid #ccc;
+	padding: 20px;
+}
+
+.login-form{
+	width: 300px;
+	left: 50%;
+	margin-left: -150px;
+	position: relative;
+	/*height: 220px;*/
+	margin-top: 140px;
+}
+
+.formtitle{
+	margin-top: -50px;
+	margin-bottom: 20px;
+	font-weight: bold;
+	margin-left: -20px;
+}
+
+form{
+	margin: 0px !important;
+}
+
+.form-group{
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+button{
+	font-size: 18px;
+	font-weight: bold;
+	border-width: 0px;
+	border-radius: 4px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-top: 10px;
+}
+
+.formwindow, .infowindow{
+	left: 240px;
+	right: 40px;
+	top: 100px;
+	position: absolute;
+	min-height: 100px;
+	/*width: 600px;*/
+	border: 2px solid #17A3A5;
+}
+
+.sidebar{
+	left: 10px;
+	width: 150px;
+	padding: 20px;
+	top: 100px;
+	position: absolute;
+}
+
+.sidebar > .option{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.option a{
+	color: white !important;
+}
+
+label{
+	display: block;
+}
+
+input{
+	width: 280px;
+}
+
+select{
+	font-size: 18px;
+	font-weight: bold;	
+}
+
+.turq{
+	background-color: #17A3A5;
+}
+.peach{
+	background-color: #FEE0C6;
+}
+.porcelain{
+	background-color: #FEF9ED;
+}
+.whitefont{
+	color: white;
+}
+
+#logoheader{
+	font-size: 30px;
+	font-weight: bold;
+	width: 100%;
+	height: 50px;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	padding-top: 10px;
+	padding-left: 15px;
+	z-index: 10000;
+}
+#logosubheader{
+	font-size: 20px;
+	font-weight: bold;
+	/*width: 100%;*/
+	/*height: 40px;*/
+	position: relative;
+	display: inline-block;
+	margin-left: 10px;
+	width: 400px;
+}
+#patientheader{
+	position: absolute;
+	right: 20px;
+	top: 20px;
+	display: inline-block;
+	margin-left: 10px;
+	width: 200px;
+}
+.infowindow tr:first-child > td{
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 10px;
+	font-weight: bold;
+}
+.infowindow tr:nth-child(even) {
+	background: #CCC
+}
+tr > td{
+	padding-bottom: 5px;
+	padding-top: 5px;
+	padding-left: 5px;
+}
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+a{
+	color: black;
+	text-decoration: none !important;
+}
+.formwindow td:first-child{
+	text-align: right;
+}
+.formwindow td:nth-child(2){
+	padding-left: 10px;
+}
+input[type="checkbox"]{
+	display: inline;
+	width: 20px !important;
+}
+.formwindow input[type="text"]{
+	width: 40px;
+}
+input[type="radio"]{
+	width: 20px !important;
+}
+input[type="text"]{
+	width: 100px !important;
+}
+option{
+	font-size: 18px;	
+}

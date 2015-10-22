@@ -1,0 +1,32 @@
+
+	<div class="form login-form">
+	<div class= "formtitle">New User?</div>
+		<!-- REGISTRATION FORM -->
+		<form action="/signup" method="post">
+			<div class="form-group">
+				<label>First Name</label>
+				<input type="text" class="form-control" name="firstname" ng-model="User.firstname">
+			</div>
+			<div class="form-group">
+				<label>Last Name</label>
+				<input type="text" class="form-control" name="lastname" ng-model="User.lastname">
+			</div>
+			<div class="form-group">
+				<label>Role</label>
+				<select ng-model="User.role">
+					<option type="text" class="form-control" name="email" value="Patient">Patient</option>
+					<option type="text" class="form-control" name="email" value="Caregiver">Caregiver</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label>Email</label>
+				<input type="text" class="form-control" name="email" ng-model="User.email">
+			</div>
+			<div class="form-group">
+				<label>Password</label>
+				<input type="password" class="form-control" name="password" ng-model="User.password">
+			</div>
+
+			<button type="submit" class="turq whitefont" ng-click="User.signup()">Sign Up</button>
+		</form>
+	</div>

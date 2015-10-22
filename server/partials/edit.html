@@ -1,0 +1,69 @@
+<div class = "formwindow">
+	<table style= "margin-left: 20px; margin-top: 20px; margin-bottom: 30px;">
+		<tr>
+			<td width="150px"></td>
+			<td width="500px"></td>
+		</tr>
+		<tr>
+			<td>Repeats:</td>
+			<td>
+				<select>
+					<option value = "Daily">Daily</option>
+					<option value = "Weekly">Weekly</option>
+					<option value = "Monthly">Monthly</option>
+					<option value = "Annual">Annual</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Repeats every:</td>
+			<td>
+				<select>
+					<option value = "1">1</option>
+					<option value = "2">2</option>
+					<option value = "3">3</option>
+					<option value = "4">4</option>
+				</select>
+				weeks
+			</td>
+		</tr>
+		<tr>
+			<td>Repeats on:</td>
+			<td>
+			<div>
+			<input type="checkbox" name="weekday" value="sunday">Sun
+			<input type="checkbox" name="weekday" value="monday">Mon
+			<input type="checkbox" name="weekday" value="tuesday">Tue
+			<input type="checkbox" name="weekday" value="wednesday">Wed
+			<input type="checkbox" name="weekday" value="thursday">Thurs
+			<input type="checkbox" name="weekday" value="friday">Fri
+			<input type="checkbox" name="weekday" value="saturday">Sa
+			<div>
+			</td>
+		</tr>
+		<tr>
+			<td>Starts on:</td>
+			<td>
+				<input type="text" name = "startdate" value = "12/1/2015">
+				</input>
+			</td>
+		</tr>
+		<tr>
+			<td>Ends:</td>
+			<td>
+				<div class="form-group">
+					<input type="radio" name="weekday" value="thursday">Never
+				</div>
+				<div class="form-group">
+					<input type="radio" name="weekday" value="friday">After &nbsp;&nbsp;&nbsp;<input type="text" name = "endoccurences"></input> &nbsp;occurences
+				</div>
+				<div class="form-group">
+					<input type="radio" name="weekday" value="saturday">On &nbsp;&nbsp;&nbsp;<input type="text" name = "enddate"value = "6/1/2015"> &nbsp;</input>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Summary</td>
+		</tr>
+	</table>
+</div>
