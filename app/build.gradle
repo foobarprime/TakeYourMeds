@@ -84,4 +84,8 @@ dependencies {
 
     // spinner
     compile 'org.buraktamturk:loadingview:1.0.0@aar'
+
+    // fancy button
+    compile 'com.github.medyo:fancybuttons:1.4@aar'
+
 }

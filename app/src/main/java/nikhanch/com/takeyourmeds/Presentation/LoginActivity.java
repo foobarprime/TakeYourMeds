@@ -18,14 +18,12 @@ import nikhanch.com.takeyourmeds.Service.GoogleCalendarDataSyncService;
 public class LoginActivity extends Activity {
 
 
-    public final String userName = "Albert";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
+        final String userName = getString(R.string.UserName);
         String welcomeMessageString = "";
         boolean isMorning = Calendar.getInstance().get(Calendar.AM_PM) == Calendar.AM;
         if (Calendar.getInstance().get(Calendar.AM_PM) == Calendar.AM){
@@ -43,8 +41,8 @@ public class LoginActivity extends Activity {
         welcomeMessageTextView.setText(welcomeMessageString);
         welcomeMessageTextView.setTextColor(ColorStateList.valueOf(Color.WHITE));
 
-        startService(new Intent(this, GoogleCalendarDataSyncService.class));
 
+        startService(new Intent(this, GoogleCalendarDataSyncService.class));
     }
 
     public void onViewAppointmentsClicked(View v){

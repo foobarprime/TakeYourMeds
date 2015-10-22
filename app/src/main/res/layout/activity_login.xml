@@ -8,7 +8,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".LoginActivity"
-    android:background="#62d4ff"
+    android:background="@color/colorPrimary"
     >
 <!--android:background="@mipmap/sky_background2" -->
     <com.pkmmte.view.CircularImageView
@@ -27,20 +27,32 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/welcomeMessage"
         android:layout_below="@+id/userPhoto"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp" />
 
-    <Button
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View Appointments &amp; Medication"
-        android:id="@+id/button"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
         android:layout_below="@+id/welcomeMessage"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="42dp"
-        android:onClick="onViewAppointmentsClicked"/>
+        android:onClick="onViewAppointmentsClicked"
+        app:fb_borderColor="#FFFFFF"
+        app:fb_borderWidth="3dp"
+        app:fb_defaultColor="#EEEEEE"
+        app:fb_focusColor="#FFFFFF"
+        app:fb_radius="30dp"
+        app:fb_text="View Appointments &amp; Medication"
+        app:fb_textColor="#000000" />
+
+/>
 
 </RelativeLayout>

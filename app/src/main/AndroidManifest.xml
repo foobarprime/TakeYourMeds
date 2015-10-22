@@ -24,10 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Presentation.AppointmentActivity"
-            android:label="@string/title_activity_appointment" >
+            android:label="@string/title_activity_appointment"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
 
         <service
@@ -49,17 +49,26 @@
             android:enabled="true"
             android:exported="true" >
         </receiver>
-        <receiver android:name=".Service.NotificationPublisher"
+        <receiver
+            android:name=".Service.NotificationPublisher"
             android:enabled="true"
             android:exported="true" >
         </receiver>
+
         <activity
             android:name=".Presentation.PatientFeedsActivity"
             android:label="@string/title_activity_patient_feeds" >
         </activity>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="4e9ede3f9825298ab06e5237d30a76214d65abd5" />
+
+        <activity
+            android:name=".Presentation.AddItemActivity"
+            android:label="@string/title_activity_add_item"
+            android:theme="@style/AppTheme" >
+        </activity>
     </application>
 
 </manifest>

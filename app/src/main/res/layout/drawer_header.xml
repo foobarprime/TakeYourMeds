@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="178dp"
+    android:background="@mipmap/background_poly"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <com.pkmmte.view.CircularImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@mipmap/user_photo"
+        android:id="@+id/userPhoto"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        app:border="true"
+        app:border_color="#EEEEEE"
+        app:border_width="4dp"
+        app:shadow="true" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:textColor="#ffffff"
+            android:text="@string/UserName"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            />
+
+    </LinearLayout>
+    <!--
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@mipmap/user_photo"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="38dp"
+            android:id="@+id/circleView"
+            /> -->

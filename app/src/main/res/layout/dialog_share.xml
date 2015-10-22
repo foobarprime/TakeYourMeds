@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_horizontal_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+
+    android:background="@color/colorPrimary">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="Share"
+        android:id="@+id/textView"
+        android:textColor="#ffffff"
+        android:layout_gravity="center_horizontal" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Share Alerts"
+        android:textColor="#ffffff"
+        android:id="@+id/checkBoxAlerts"/>
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Share Appointments"
+        android:textColor="#ffffff"
+        android:id="@+id/checkBoxAppointments" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Share Medications"
+        android:textColor="#ffffff"
+        android:id="@+id/checkBoxMedications" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Account to share with"
+        android:textColor="#ffffff"
+        android:id="@+id/textView2" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/emailToShareWith"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#ffffff" />
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:id="@+id/share_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="42dp"
+        app:fb_borderColor="#FFFFFF"
+        app:fb_borderWidth="3dp"
+        app:fb_defaultColor="#EEEEEE"
+        app:fb_focusColor="#FFFFFF"
+        app:fb_radius="30dp"
+        app:fb_text="Share"
+        app:fb_textColor="#000000"
+        android:layout_gravity="center_horizontal" />
+</LinearLayout>

@@ -13,8 +13,10 @@
     <string name="title_activity_appointment">AppointmentActivity</string>
     <string name="UpcomingAppointmentsActivityName">Upcoming Appointments</string>
 
+    <string name="UserName">Albert</string>
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_patient_feeds">PatientFeedsActivity</string>
+    <string name="title_activity_add_item">AddItemActivity</string>
 
 </resources>

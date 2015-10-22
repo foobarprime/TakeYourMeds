@@ -177,7 +177,7 @@ public class MedicationCalendarManager implements SyncMedicationAsyncTaskConsume
             }
 
             Events events = service.events().list(medicationsCalendarId)
-                    .setMaxResults(70)
+                    .setMaxResults(200)
                     .setOrderBy("startTime")
                     .setSingleEvents(true)
                     .execute();

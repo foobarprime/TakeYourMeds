@@ -6,7 +6,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:layout_height="160dp">
+    android:layout_height="180dp">
 
     <ImageView
         android:layout_width="95dp"
@@ -24,26 +24,14 @@
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/proedureInfoLayout"
-            android:layout_width="fill_parent"
+
+        <TextView
+            android:id="@+id/card_main_procedure_name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-            <TextView
-                android:id="@+id/card_main_procedure_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="CT Scan"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:text="CT Scan"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="  with"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:layout_gravity="left|bottom"/>
-
-        </LinearLayout>
 
         <TextView
             android:id="@+id/card_main_doctors_name"

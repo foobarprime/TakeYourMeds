@@ -2,6 +2,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="nikhanch.com.takeyourmeds.Presentation.PatientFeedsActivity">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
+
+   <!-- <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
+-->
+    <item android:id="@+id/action_Add"
+        android:orderInCategory="200"
+        android:title="Add"
+        android:icon="@mipmap/ic_add"
+        android:onClick="showAddDialog"
+        app:showAsAction="ifRoom">
+    </item>
+    <item android:id="@+id/action_share"
+        android:orderInCategory="300"
+        android:title="Share"
+        android:onClick="showShareDialog"
+        android:icon="@mipmap/ic_share"
+        app:showAsAction="ifRoom">
+
+    </item>
 </menu>
